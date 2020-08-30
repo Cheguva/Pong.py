@@ -4,8 +4,8 @@ from PyQt5.QtGui import QIcon
 class Calculator(QWidget):
     def __init__(self, parent=None):
          super().__init__(parent)
-         self.interfejs()
-    def interfejs(self):
+         self.interface()
+    def interface(self):
          self.resize(300, 100)
          self.setWindowTitle("calculator")
          self.show()
@@ -38,10 +38,23 @@ class Calculator(QWidget):
          layoutT.addLayout(layoutH, 2, 0, 1, 3)
          layoutT.addWidget(endBtn, 3, 0, 1, 3)
          self.setLayout(layoutT)
+         endBtn.clicked.connect(self.end)
          self.setGeometry(20, 20, 300, 100)
          self.setWindowIcon(QIcon('calculator.png'))
          self.setWindowTitle("Graphic calc")
          self.show()
+    def end(self):
+        self.close()
+    def closeEvent(self, event):
+        ans = QMessageBox.question(
+            self, "Message",
+            "Are you sure?",
+            QMessageBox.Yes | QMessageBox.No, QMessageBox
+            if ans == QMessageBox.Yes:
+                event.accept()
+            else:
+                event.ignore()
+        )
 
 if __name__ == "__main__":
     import sys

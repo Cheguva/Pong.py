@@ -1,6 +1,5 @@
-<<<<<<< HEAD
-
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QGridLayout, QLineEdit, QPushButton, QHBoxLayout
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, 
+from PyQt5.QtWidgets import QGridLayout, QLineEdit, QPushButton, QHBoxLayout
 from PyQt5.QtGui import QIcon
 class Calculator(QWidget):
     def __init__(self, parent=None):
@@ -42,6 +41,3 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = calculator()
     sys.exit(app.exec_())
-=======
-print ("derk")
->>>>>>> 40a29f2a7fa550f48e51a09afd296e43f8301a16

@@ -1,5 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, 
-from PyQt5.QtWidgets import QGridLayout, QLineEdit, QPushButton, QHBoxLayout
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QGridLayout, QLineEdit, QPushButton, QHBoxLayout
 from PyQt5.QtGui import QIcon
 class Calculator(QWidget):
     def __init__(self, parent=None):

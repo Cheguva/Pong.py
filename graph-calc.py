@@ -30,6 +30,10 @@ class Calculator(QWidget):
          divisionBtn = QPushButton("&Division", self)
          endBtn = QPushButton("&End", self)
          endBtn.resize(endBtn.sizeHint())
+         addBtn.clicked.connect(self.equation)
+         substractBtn.clicked.connect(self.equation)
+         multiplicateBtn.clicked.connect(self.equation)
+         divisionBtn.clicked.connect(self.equation)
          layoutH = QHBoxLayout()
          layoutH.addWidget(addBtn)
          layoutH.addWidget(substractBtn)
@@ -49,13 +53,36 @@ class Calculator(QWidget):
         ans = QMessageBox.question(
             self, "Message",
             "Are you sure?",
-            QMessageBox.Yes | QMessageBox.No, QMessageBox
-            if ans == QMessageBox.Yes:
-                event.accept()
+            QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        if ans == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
+    def keyPressEvent(self, e):
+        if e.key() == Qt.Key_Escape:
+            self.close()
+    def equation(self):
+        sender = self.sender()
+        try:
+            number1 = float(self.number1Edt.text())
+            number2 = float(self.number2Edt.text())
+            result = ""
+            if sender.text() == "&Add":
+                result = number1 + number2 
+            elif sender.text() == "&Substract":
+                result = number1 - number2 
+            elif sender.text() == "&Multiplicate":
+                result = number1 * number2 
             else:
-                event.ignore()
-        )
-
+                try:
+                    result = round(number1 / number2, 12)
+                except ZeroDivisionError:
+                        QMessageBox.critical(
+                            self, "Error", "You can't divide by zero!")
+                        return
+            self.resultEdt.setText(str(result))
+        except ValueError:
+            QMessageBox.Warning(self, "Error", "Wrong data", QMessageBox.Ok)
 if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)

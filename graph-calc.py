@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QGridLayout, QLineEdit, QPushButton, QHBoxLayout
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QGridLayout, QLineEdit, QPushButton, QHBoxLayout, QMessageBox
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 class Calculator(QWidget):
     def __init__(self, parent=None):
@@ -23,12 +24,19 @@ class Calculator(QWidget):
          layoutT.addWidget(self.number1Edt, 1, 0)
          layoutT.addWidget(self.number2Edt, 1, 1)
          layoutT.addWidget(self.resultEdt, 1, 2)
-         addBtn = QPushButton("Add", self)
-         substractBtn = QPushButton("Substract", self)
-         multiplicateBtn = QPushButton("Multiplicate", self)
-         endBtn = QPushButton("End", self)
+         addBtn = QPushButton("&Add", self)
+         substractBtn = QPushButton("&Substract", self)
+         multiplicateBtn = QPushButton("&Multiplicate", self)
+         divisionBtn = QPushButton("&Division", self)
+         endBtn = QPushButton("&End", self)
          endBtn.resize(endBtn.sizeHint())
-
+         layoutH = QHBoxLayout()
+         layoutH.addWidget(addBtn)
+         layoutH.addWidget(substractBtn)
+         layoutH.addWidget(multiplicateBtn)
+         layoutH.addWidget(divisionBtn)
+         layoutT.addLayout(layoutH, 2, 0, 1, 3)
+         layoutT.addWidget(endBtn, 3, 0, 1, 3)
          self.setLayout(layoutT)
          self.setGeometry(20, 20, 300, 100)
          self.setWindowIcon(QIcon('calculator.png'))
@@ -38,5 +46,5 @@ class Calculator(QWidget):
 if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)
-    window = calculator()
+    window = Calculator()
     sys.exit(app.exec_())
